@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Rubybasic::Gem::VERSION
   spec.authors       = ["ongaeshi"]
   spec.email         = ["ongaeshi0621@gmail.com"]
-  spec.description   = %q{RubyBasic installer and executer.}
-  spec.summary       = %q{RubyBasic installer and executer.}
+  spec.description   = %q{RubyBasic installer and executer}
+  spec.summary       = %q{RubyBasic installer and executer}
   spec.homepage      = "https://github.com/ongaeshi/rubybasic-gem"
   spec.license       = "MIT"
 
