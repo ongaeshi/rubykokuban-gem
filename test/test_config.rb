@@ -15,19 +15,18 @@ module Rubybasic
     end
     
     def test_home_dir
-      tmp_dir = File.join(File.dirname(__FILE__), 'tmp')
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
 
-      conf = Config.new(home_dir: File.join(tmp_dir, '.rubybasic'))
-
-      assert_equal File.join(tmp_dir, '.rubybasic'), conf.home_dir
-      assert_equal File.join(tmp_dir, '.rubybasic/app'), conf.app_dir
+      assert_equal File.join(@tmp_dir, '.rubybasic'), conf.home_dir
+      assert_equal File.join(@tmp_dir, '.rubybasic/app'), conf.app_dir
     end
 
     def test_platform
-      conf = Config.new
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
 
       if RUBY_PLATFORM =~ /darwin/
         assert_equal :osx, conf.platform
+        assert_equal File.join(@tmp_dir, '.rubybasic/app/osx'), conf.platform_dir
       end
     end
   end

@@ -32,6 +32,10 @@ module Rubybasic
       end
     end
 
+    def platform_dir(platform_sym = platform)
+      File.join(app_dir, platform_sym.to_s)
+    end
+
     private
 
     def home
