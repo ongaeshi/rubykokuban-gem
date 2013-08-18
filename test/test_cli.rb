@@ -1,6 +1,7 @@
-require 'rubybasic/cli.rb'
-require 'test/unit'
+require 'rubybasic/cli'
+
 require 'stringio'
+require 'test/unit'
 
 module Rubybasic
   class TestCLI < Test::Unit::TestCase
