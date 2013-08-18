@@ -22,6 +22,16 @@ module Rubybasic
       File.join(home_dir, 'app')
     end
 
+    def platform
+      if RUBY_PLATFORM =~ /mswin(?!ce)|mingw|cygwin|bccwin/
+        :win
+      elsif RUBY_PLATFORM =~ /darwin/
+        :osx
+      else
+        nil
+      end
+    end
+
     private
 
     def home
