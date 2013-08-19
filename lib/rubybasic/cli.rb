@@ -18,7 +18,7 @@ module Rubybasic
 
       case conf.platform
       when :osx
-        app  = File.join(conf.platform_dir, "0.0.1", "RubyBasic.app") # Specify latest version
+        app  = File.join(conf.latest_dir, "RubyBasic.app")
         args = args.map{|v| File.expand_path v}
         system("open #{app} --new --args #{args.join(" ")}")
       else
