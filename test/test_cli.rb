@@ -15,8 +15,7 @@ module Rubybasic
     end
 
     def test_no_arg
-      # assert_match /Tasks:/, command("")    # old bundler
-      assert_match /Commands:/, command("")
+      assert_match /Install RubyBasic binary/, command("")
     end
 
     # def test_install
