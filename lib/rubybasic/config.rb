@@ -39,27 +39,10 @@ module Rubybasic
     def self.pickup_latest(versions)
       return nil if versions.empty?
       
-      vers = versions.map{|v|
-        {num: v.split('.').map{|i| Integer(i)}, str: v}
+      vers = versions.map{|str|
+        {str: str, padding: str.split('.').map{|s| s.rjust(8 - s.length, '0')}.join('.') }
       }.sort {|a, b|
-        # length = (a[:num].length < b[:num].length) ? a[:num].length : b[:num].length
-
-        # (0...length).each do |i|
-        #   r = b[:num][i] <=> a[:num][i]
-        #   return r if r != 0
-        # end
-        
-        r = b[:num][0] <=> a[:num][0]
-        if r != 0
-          r
-        else
-          r = b[:num][1] <=> a[:num][1]
-          if r != 0
-            r
-          else
-             b[:num][2] <=> a[:num][2]
-          end
-        end
+        b[:padding] <=> a[:padding]
       }
       
       vers.first[:str]

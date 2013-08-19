@@ -37,8 +37,9 @@ module Rubybasic
       assert_equal "10.0.0", Config.pickup_latest(["1.0.0", "10.0.0"])
       assert_equal "1.2.0", Config.pickup_latest(["1.2.0", "1.1.0"])
       assert_equal "1.2.3", Config.pickup_latest(["1.2.2", "0.2.3", "1.2.3"])
-      # assert_equal "1.2.3", Config.pickup_latest(["1.2", "1.2.3"])
-      # assert_equal "1.0.0", Config.pickup_latest(["a.0.0"])
+      assert_equal "1.2.3", Config.pickup_latest(["1.2", "1.2.3"])
+      assert_equal "1.1.1.1", Config.pickup_latest(["1", "1.1.1", "1.1.1.1", "1.1"])
+      assert_equal "1.0.101", Config.pickup_latest(["1.0.11", "1.0.101"])
     end
   end
 end
