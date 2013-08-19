@@ -41,5 +41,15 @@ module Rubybasic
       assert_equal "1.1.1.1", Config.pickup_latest(["1", "1.1.1", "1.1.1.1", "1.1"])
       assert_equal "1.0.101", Config.pickup_latest(["1.0.11", "1.0.101"])
     end
+
+    def test_latest_dir
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      FileUtils.mkdir_p File.join(conf.platform_dir, "0.1.0")
+      FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.0")
+      FileUtils.mkdir_p File.join(conf.platform_dir, "2.0.0")
+
+      assert_equal File.join(@tmp_dir, ".rubybasic/app/#{conf.platform.to_s}/2.0.0"), conf.latest_dir
+    end
+
   end
 end

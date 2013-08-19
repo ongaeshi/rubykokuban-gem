@@ -48,6 +48,12 @@ module Rubybasic
       vers.first[:str]
     end
 
+    def latest_dir
+      dir      = platform_dir
+      versions = Dir.glob(File.join(dir, "*")).map {|path| File.basename(path)}
+      File.join(dir, Config.pickup_latest(versions))
+    end
+      
     private
 
     def home
