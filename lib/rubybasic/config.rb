@@ -36,6 +36,35 @@ module Rubybasic
       File.join(app_dir, platform_sym.to_s)
     end
 
+    def self.pickup_latest(versions)
+      return nil if versions.empty?
+      
+      vers = versions.map{|v|
+        {num: v.split('.').map{|i| Integer(i)}, str: v}
+      }.sort {|a, b|
+        # length = (a[:num].length < b[:num].length) ? a[:num].length : b[:num].length
+
+        # (0...length).each do |i|
+        #   r = b[:num][i] <=> a[:num][i]
+        #   return r if r != 0
+        # end
+        
+        r = b[:num][0] <=> a[:num][0]
+        if r != 0
+          r
+        else
+          r = b[:num][1] <=> a[:num][1]
+          if r != 0
+            r
+          else
+             b[:num][2] <=> a[:num][2]
+          end
+        end
+      }
+      
+      vers.first[:str]
+    end
+
     private
 
     def home

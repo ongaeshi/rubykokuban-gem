@@ -29,5 +29,16 @@ module Rubybasic
         assert_equal File.join(@tmp_dir, '.rubybasic/app/osx'), conf.platform_dir
       end
     end
+
+    def test_pickup_latest
+      assert_equal nil    , Config.pickup_latest([])
+      assert_equal "1.0.0", Config.pickup_latest(["1.0.0"])
+      assert_equal "2.0.0", Config.pickup_latest(["1.0.0", "2.0.0"])
+      assert_equal "10.0.0", Config.pickup_latest(["1.0.0", "10.0.0"])
+      assert_equal "1.2.0", Config.pickup_latest(["1.2.0", "1.1.0"])
+      assert_equal "1.2.3", Config.pickup_latest(["1.2.2", "0.2.3", "1.2.3"])
+      # assert_equal "1.2.3", Config.pickup_latest(["1.2", "1.2.3"])
+      # assert_equal "1.0.0", Config.pickup_latest(["a.0.0"])
+    end
   end
 end
