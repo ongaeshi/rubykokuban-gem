@@ -6,6 +6,8 @@ require 'rubybasic/gem/version'
 
 module Rubybasic
   class CLI < Thor
+    class NotFoundError < RuntimeError ; end
+
     class_option :help, :type => :boolean, :aliases => '-h', :desc => 'Help message'
     class_option :version, :type => :boolean, :desc => 'Show version.'
 
@@ -29,13 +31,20 @@ module Rubybasic
       
       conf = Config.new
 
-      case conf.platform
-      when :osx
-        app  = File.join(conf.latest_dir, "RubyBasic.app")
-        args = args.map{|v| File.expand_path v}
-        system("open #{app} --new --args #{args.join(" ")}")
-      else
-        raise "Not supported platform '#{conf.platform}'"
+      begin
+        case conf.platform
+        when :osx
+          app  = File.join(conf.latest_dir, "RubyBasic.app")
+          args = args.map {|v|
+            raise NotFoundError, "Not found '#{v}'" unless File.exist?(v)
+            File.expand_path(v)
+          }
+          system("open #{app} --new --args #{args.join(" ")}")
+        else
+          raise "Not supported platform '#{conf.platform}'"
+        end
+      rescue NotFoundError => e
+        puts e.message
       end
     end
 
