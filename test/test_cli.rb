@@ -15,16 +15,24 @@ module Rubybasic
     end
 
     def test_no_arg
-      assert_match /Install RubyBasic binary/, command("")
+      assert_match /exec.*help.*install/m, command("")
     end
 
-    # def test_install
-    #   assert_match /install/, command("install")
-    # end
+    def test_help
+      assert_match /exec.*help.*install/m, command("-h")
+    end
 
-    # def test_exec
-    #   assert_match /exec/, command("exec")
-    # end
+    def test_install_no_arg
+      assert_match /Usage.*install/m, command("install")
+    end
+
+    def test_exec_no_arg
+      assert_match /Usage.*exec/m, command("exec")
+    end
+
+    def test_exec_help
+      assert_match /Usage.*exec/m, command("exec -h")
+    end
 
     private
 
