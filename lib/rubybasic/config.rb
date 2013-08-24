@@ -1,4 +1,6 @@
 require 'fileutils'
+require 'json'
+require 'open-uri'
 
 module Rubybasic
   class Config
@@ -58,6 +60,12 @@ module Rubybasic
       dir = File.join(platform_dir, version)
       FileUtils.mkdir_p(dir) unless File.exist?(dir)
       dir
+    end
+
+    def install_latest_version
+      src  = open("https://api.github.com/repos/ongaeshi/rubybasic-#{platform.to_s}/releases").read
+      json = JSON.parse(src)
+      json[0]['tag_name'][1..-1] # 'v0.2.0' -> '0.2.0'
     end
       
     private
