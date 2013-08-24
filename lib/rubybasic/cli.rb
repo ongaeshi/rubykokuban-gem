@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'rubygems'
 require 'thor'
+require 'fetcher'
 require 'rubybasic/config'
 require 'rubybasic/gem/version'
 
@@ -19,7 +20,27 @@ module Rubybasic
         return
       end
 
-      p "install #{options}"
+      conf = Config.new
+
+      logger = Logger.new(STDOUT)
+      logger.level = Logger::INFO
+      worker = Fetcher::Worker.new(logger)
+
+      platform = conf.platform.to_s
+      version  = "0.0.2"
+      
+      url      = "https://github.com/ongaeshi/rubybasic-#{platform}/releases/download/v#{version}"
+      filename = "rubybasic-#{platform}-#{version}.zip"
+      src      = File.join(url, filename)
+      dst      = File.join(conf.install_dir(version), filename)
+
+      case conf.platform
+      when :osx
+        puts "Download #{src} -> #{dst}"
+        worker.copy(src, dst)
+      else
+        raise "Not supported platform '#{conf.platform}'"
+      end
     end
 
     desc "exec [input_file]", "Execute rubybasic file"
@@ -34,6 +55,7 @@ module Rubybasic
       begin
         case conf.platform
         when :osx
+          # p conf.latest_dir
           app  = File.join(conf.latest_dir, "RubyBasic.app")
           args = args.map {|v|
             raise NotFoundError, "Not found '#{v}'" unless File.exist?(v)
