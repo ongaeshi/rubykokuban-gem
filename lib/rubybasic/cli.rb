@@ -4,6 +4,7 @@ require 'thor'
 require 'fetcher'
 require 'rubybasic/config'
 require 'rubybasic/gem/version'
+require 'rubybasic/zip_utils'
 
 module Rubybasic
   class CLI < Thor
@@ -38,6 +39,10 @@ module Rubybasic
       when :osx
         puts "Download #{src} -> #{dst}"
         worker.copy(src, dst)
+        puts "Unzip #{dst}"
+        system("unzip -q #{dst} -d #{File.dirname(dst)}")
+        # ZipUtils.zip_extract(dst, File.dirname(dst), {no_dir: true})
+        FileUtils.rm_f dst
       else
         raise "Not supported platform '#{conf.platform}'"
       end
