@@ -53,6 +53,12 @@ module Rubybasic
       versions = Dir.glob(File.join(dir, "*")).map {|path| File.basename(path)}
       File.join(dir, Config.pickup_latest(versions))
     end
+
+    def install_dir(version)
+      dir = File.join(platform_dir, version)
+      FileUtils.mkdir_p(dir) unless File.exist?(dir)
+      dir
+    end
       
     private
 
