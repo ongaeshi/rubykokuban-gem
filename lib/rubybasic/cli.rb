@@ -23,29 +23,31 @@ module Rubybasic
 
       conf = Config.new
 
+      case conf.platform
+      when :osx
+      else
+        raise "Not supported platform '#{conf.platform}'"
+      end
+
       logger = Logger.new(STDOUT)
       logger.level = Logger::INFO
       worker = Fetcher::Worker.new(logger)
 
       platform = conf.platform.to_s
-      version  = "0.0.2"
+      puts "Search latest version ..."
+      version  = conf.install_latest_version
       
       url      = "https://github.com/ongaeshi/rubybasic-#{platform}/releases/download/v#{version}"
       filename = "rubybasic-#{platform}-#{version}.zip"
       src      = File.join(url, filename)
       dst      = File.join(conf.install_dir(version), filename)
 
-      case conf.platform
-      when :osx
-        puts "Download #{src} -> #{dst}"
-        worker.copy(src, dst)
-        puts "Unzip #{dst}"
-        system("unzip -q #{dst} -d #{File.dirname(dst)}")
-        # Utils.zip_extract(dst, File.dirname(dst), {no_dir: true})
-        FileUtils.rm_f dst
-      else
-        raise "Not supported platform '#{conf.platform}'"
-      end
+      puts "Download #{src}"
+      worker.copy(src, dst)
+      puts "Unzip #{dst}"
+      system("unzip -q #{dst} -d #{File.dirname(dst)}")
+      # Utils.zip_extract(dst, File.dirname(dst), {no_dir: true})
+      FileUtils.rm_f dst
     end
 
     desc "exec [input_file]", "Execute rubybasic file"
