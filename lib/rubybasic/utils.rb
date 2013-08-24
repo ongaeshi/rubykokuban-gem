@@ -3,7 +3,7 @@ require 'rubygems'
 require 'archive/zip'
 
 module Rubybasic
-  module ZipUtils
+  module Utils
     module_function
 
     class ZipfileNotFound < RuntimeError ; end    
