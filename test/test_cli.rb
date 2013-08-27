@@ -26,6 +26,10 @@ module Rubybasic
       assert_match /Usage.*install/m, command("install")
     end
 
+    def test_install_latest
+      # puts command("install --latest")
+    end
+
     def test_exec_no_arg
       assert_match /Usage.*exec/m, command("exec")
     end
