@@ -1,0 +1,10 @@
+language: ruby
+
+notifications:
+  email:
+    recipients:  
+      - ongaeshi0621@gmail.com
+      
+rvm:
+  - 1.9.3
+  - 2.0.0
