@@ -77,6 +77,12 @@ module Rubybasic
       end
     end
 
+    desc "list", "Display installed version"
+    def list
+      conf = Config.new
+      puts "#{conf.platform.to_s} (#{conf.versions.join(', ')})"
+    end
+
     no_tasks do
       # Override method for support -h 
       # defined in /lib/thor/invocation.rb

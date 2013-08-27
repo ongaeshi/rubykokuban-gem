@@ -38,22 +38,30 @@ module Rubybasic
       File.join(app_dir, platform_sym.to_s)
     end
 
-    def self.pickup_latest(versions)
-      return nil if versions.empty?
-      
+    def self.sort_versions(versions)
       vers = versions.map{|str|
         {str: str, padding: str.split('.').map{|s| s.rjust(8 - s.length, '0')}.join('.') }
       }.sort {|a, b|
         b[:padding] <=> a[:padding]
+      }.map {|a|
+        a[:str]
       }
-      
-      vers.first[:str]
+    end
+
+    def versions
+      versions = Dir.glob(File.join(platform_dir, "*")).map {|path| File.basename(path)}
+
+      versions.map{|str|
+        {str: str, padding: str.split('.').map{|s| s.rjust(8 - s.length, '0')}.join('.') }
+      }.sort {|a, b|
+        b[:padding] <=> a[:padding]
+      }.map {|a|
+        a[:str]
+      }
     end
 
     def latest_dir
-      dir      = platform_dir
-      versions = Dir.glob(File.join(dir, "*")).map {|path| File.basename(path)}
-      File.join(dir, Config.pickup_latest(versions))
+      File.join(platform_dir, versions.first)
     end
 
     def install_dir(version)
@@ -65,6 +73,7 @@ module Rubybasic
     def install_latest_version
       src  = open("https://api.github.com/repos/ongaeshi/rubybasic-#{platform.to_s}/releases").read
       json = JSON.parse(src)
+      # p json
       json[0]['tag_name'][1..-1] # 'v0.2.0' -> '0.2.0'
     end
       

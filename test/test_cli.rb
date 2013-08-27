@@ -38,6 +38,14 @@ module Rubybasic
       assert_match /Usage.*exec/m, command("exec -h")
     end
 
+    def test_list_no_arg
+      command("list")
+    end
+
+    def test_list_help
+      assert_match /Usage.*list/m, command("list -h")
+    end
+
     private
 
     def command(arg)

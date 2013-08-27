@@ -30,16 +30,25 @@ module Rubybasic
       end
     end
 
-    def test_pickup_latest
-      assert_equal nil    , Config.pickup_latest([])
-      assert_equal "1.0.0", Config.pickup_latest(["1.0.0"])
-      assert_equal "2.0.0", Config.pickup_latest(["1.0.0", "2.0.0"])
-      assert_equal "10.0.0", Config.pickup_latest(["1.0.0", "10.0.0"])
-      assert_equal "1.2.0", Config.pickup_latest(["1.2.0", "1.1.0"])
-      assert_equal "1.2.3", Config.pickup_latest(["1.2.2", "0.2.3", "1.2.3"])
-      assert_equal "1.2.3", Config.pickup_latest(["1.2", "1.2.3"])
-      assert_equal "1.1.1.1", Config.pickup_latest(["1", "1.1.1", "1.1.1.1", "1.1"])
-      assert_equal "1.0.101", Config.pickup_latest(["1.0.11", "1.0.101"])
+    def test_sort_versions
+      assert_equal []     , Config.sort_versions([])
+      assert_equal "1.0.0", Config.sort_versions(["1.0.0"]).first
+      assert_equal "2.0.0", Config.sort_versions(["1.0.0", "2.0.0"]).first
+      assert_equal "10.0.0", Config.sort_versions(["1.0.0", "10.0.0"]).first
+      assert_equal "1.2.0", Config.sort_versions(["1.2.0", "1.1.0"]).first
+      assert_equal "1.2.3", Config.sort_versions(["1.2.2", "0.2.3", "1.2.3"]).first
+      assert_equal "1.2.3", Config.sort_versions(["1.2", "1.2.3"]).first
+      assert_equal "1.1.1.1", Config.sort_versions(["1", "1.1.1", "1.1.1.1", "1.1"]).first
+      assert_equal "1.0.101", Config.sort_versions(["1.0.11", "1.0.101"]).first
+    end
+
+    def test_versions
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      FileUtils.mkdir_p File.join(conf.platform_dir, "10.1.0")
+      FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.0")
+      FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.2")
+
+      assert_equal ["10.1.0", "1.1.2", "1.1.0"], conf.versions
     end
 
     def test_latest_dir
