@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 require 'rubygems'
-require 'thor'
 require 'fetcher'
+require 'fileutils'
 require 'rubybasic/config'
 require 'rubybasic/gem/version'
 require 'rubybasic/utils'
+require 'thor'
 
 module Rubybasic
   class CLI < Thor
@@ -81,6 +82,26 @@ module Rubybasic
     def list
       conf = Config.new
       puts "#{conf.platform.to_s} (#{conf.versions.join(', ')})"
+    end
+
+    desc "uninstall", "Uninstall rubybasic from the local repository"
+    option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
+    def uninstall
+      conf = Config.new
+
+      if options[:version]
+        uninstall_dir = File.join(conf.platform_dir, options[:version])
+
+        if File.exist?(uninstall_dir)
+          FileUtils.rm_rf uninstall_dir
+          puts "Successfully uninstalled #{uninstall_dir}"
+        else
+          puts "Not found #{uninstall_dir}"
+        end
+      else
+        puts "Please specify version with '-v'"
+        puts conf.versions.map {|v| "  #{v}"}.join("\n")
+      end
     end
 
     no_tasks do
