@@ -15,6 +15,7 @@ module Rubybasic
 
     desc "install [options]", "Install RubyBasic binary"
     option :latest, :type => :boolean, :desc => 'Install latest version'
+    option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
     def install
       if options.empty?
         CLI.task_help(shell, "install")
@@ -34,8 +35,7 @@ module Rubybasic
       worker = Fetcher::Worker.new(logger)
 
       platform = conf.platform.to_s
-      puts "Search latest version ..."
-      version  = conf.install_latest_version
+      version  = options[:version] || conf.install_latest_version
       
       url      = "https://github.com/ongaeshi/rubybasic-#{platform}/releases/download/v#{version}"
       filename = "rubybasic-#{platform}-#{version}.zip"
@@ -44,10 +44,30 @@ module Rubybasic
 
       puts "Download #{src}"
       worker.copy(src, dst)
-      puts "Unzip #{dst}"
+      puts "Unzip    #{dst}"
       system("unzip -q #{dst} -d #{File.dirname(dst)}")
       # Utils.zip_extract(dst, File.dirname(dst), {no_dir: true})
       FileUtils.rm_f dst
+    end
+
+    desc "uninstall", "Uninstall rubybasic from the local repository"
+    option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
+    def uninstall
+      conf = Config.new
+
+      if options[:version]
+        uninstall_dir = File.join(conf.platform_dir, options[:version])
+
+        if File.exist?(uninstall_dir)
+          FileUtils.rm_rf uninstall_dir
+          puts "Successfully uninstalled #{uninstall_dir}"
+        else
+          puts "Not found #{uninstall_dir}"
+        end
+      else
+        puts "Please specify version with '-v'"
+        puts conf.versions.map {|v| "  #{v}"}.join("\n")
+      end
     end
 
     desc "exec [input_file]", "Execute rubybasic file"
@@ -81,26 +101,6 @@ module Rubybasic
     def list
       conf = Config.new
       puts "#{conf.platform.to_s} (#{conf.versions.join(', ')})"
-    end
-
-    desc "uninstall", "Uninstall rubybasic from the local repository"
-    option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
-    def uninstall
-      conf = Config.new
-
-      if options[:version]
-        uninstall_dir = File.join(conf.platform_dir, options[:version])
-
-        if File.exist?(uninstall_dir)
-          FileUtils.rm_rf uninstall_dir
-          puts "Successfully uninstalled #{uninstall_dir}"
-        else
-          puts "Not found #{uninstall_dir}"
-        end
-      else
-        puts "Please specify version with '-v'"
-        puts conf.versions.map {|v| "  #{v}"}.join("\n")
-      end
     end
 
     no_tasks do
