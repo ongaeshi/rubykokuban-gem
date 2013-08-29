@@ -64,8 +64,8 @@ module Rubybasic
       File.join(platform_dir, versions.first)
     end
 
-    def install_dir(version)
-      File.join(platform_dir, version)
+    def install_dir(version = nil)
+      File.join(platform_dir, version || versions.first)
     end
 
     def install_latest_version
