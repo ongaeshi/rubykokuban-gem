@@ -12,7 +12,6 @@ module Rubybasic
     class NotFoundError < RuntimeError ; end
 
     class_option :help, :type => :boolean, :aliases => '-h', :desc => 'Help message'
-    class_option :version, :type => :boolean, :desc => 'Show version.'
 
     desc "install [options]", "Install RubyBasic binary"
     option :latest, :type => :boolean, :desc => 'Install latest version'
@@ -108,10 +107,12 @@ module Rubybasic
       # Override method for support -h 
       # defined in /lib/thor/invocation.rb
       def invoke_command(task, *args)
+        if task.name == "help" && args == [[]]
+          print "RubyBasic #{Rubybasic::Gem::VERSION}\n\n"
+        end
+        
         if options[:help]
           CLI.task_help(shell, task.name)
-        elsif options[:version] && task.name == 'help'
-          puts "rubybasic #{Rubybasic::Gem::VERSION}"
         else
           super
         end
