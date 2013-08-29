@@ -65,9 +65,7 @@ module Rubybasic
     end
 
     def install_dir(version)
-      dir = File.join(platform_dir, version)
-      FileUtils.mkdir_p(dir) unless File.exist?(dir)
-      dir
+      File.join(platform_dir, version)
     end
 
     def install_latest_version

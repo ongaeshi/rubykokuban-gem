@@ -36,14 +36,19 @@ module Rubybasic
 
       platform = conf.platform.to_s
       version  = options[:version] || conf.install_latest_version
+      install_dir = conf.install_dir(version)
+
+      FileUtils.rm_rf(install_dir) if File.exist?(install_dir)
+      FileUtils.mkdir_p(install_dir)
       
       url      = "https://github.com/ongaeshi/rubybasic-#{platform}/releases/download/v#{version}"
       filename = "rubybasic-#{platform}-#{version}.zip"
       src      = File.join(url, filename)
-      dst      = File.join(conf.install_dir(version), filename)
+      dst      = File.join(install_dir, filename)
 
       puts "Download #{src}"
       worker.copy(src, dst)
+
       puts "Unzip    #{dst}"
       system("unzip -q #{dst} -d #{File.dirname(dst)}")
       # Utils.zip_extract(dst, File.dirname(dst), {no_dir: true})
