@@ -4,7 +4,7 @@ RubyBasic installer and executer.
 
 ### RubyBasic?
 
-RubyBasicを使うと簡単にインタラクティブなアプリケーションを書く事が出来ます。
+You can write interactive applications be simplified by RubyBasic.
 
 ```ruby:hello.rb
 def draw
@@ -15,7 +15,7 @@ end
 
 画像を貼る。
 
-動かすことも簡単です。
+To move the circle is very simple.
 
 ```ruby:hello.rb
 def setup
@@ -34,25 +34,9 @@ end
 
 画像を貼る。(gifアニメ)
 
-[お絵描きソフト](https://github.com/ongaeshi/rubybasic-sample/blob/master/drawing.rb)や[シューティングゲーム](https://github.com/ongaeshi/rubybasic-sample/blob/master/mouse_shooting.rb)も。
+Many sample codes. [drawing](https://github.com/ongaeshi/rubybasic-sample/blob/master/drawing.rb) and [shooting](https://github.com/ongaeshi/rubybasic-sample/blob/master/mouse_shooting.rb).
 
 画像を貼る。(お絵描き)
-
-## Features
-
-- mruby + openFrameworks で作られています
-- 将来的に以下のようなメリットを期待しています
-  - バイナリファイルにまとめてコードを隠すことが出来ます
-  - 同じコードを複数のプラットフォームで動かすことが出来ます
-  - PCだけでなくモバイルデバイスでも動かせます
-
-## Support
-
-- [osx](https://github.com/ongaeshi/rubybasic-osx)
-- win
-- linux
-- ios
-- android
 
 ## Installation
 
@@ -60,7 +44,7 @@ end
 
 ## Usage
 
-### Install RubyBasic.app/
+### Install RubyBasic.app
 
     $ rubybasic install --latest
     
@@ -89,6 +73,23 @@ end
     $ git clone https://github.com/ongaeshi/rubybasic-sample
     $ cd rubybasic-sample
     $ rubybasic exec mouse-shooting.rb
+
+## Support
+
+- [osx](https://github.com/ongaeshi/rubybasic-osx)
+- win
+- linux
+- ios
+- android
+
+## Features
+
+- It's made width mruby + openFrameworks.
+  - Not a library. It's an application that move independently.
+- Benefits that can be expected.
+  - Run on multiple platforms the same code
+  - Run in the mobile device as well as PC
+  - Hide the code together in the binary file
 
 ## Special Thanks
 
