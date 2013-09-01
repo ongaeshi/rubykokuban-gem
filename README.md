@@ -13,7 +13,7 @@ def draw
 end
 ```
 
-画像を貼る。
+![hello-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-01.png)
 
 To move the circle is very simple.
 
@@ -32,11 +32,11 @@ def draw
 end
 ```
 
-画像を貼る。(gifアニメ)
+![moveo-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-02.gif)
 
-Many sample codes. [drawing](https://github.com/ongaeshi/rubybasic-sample/blob/master/drawing.rb) and [shooting](https://github.com/ongaeshi/rubybasic-sample/blob/master/mouse_shooting.rb).
+Sample code of [drawing](https://github.com/ongaeshi/rubybasic-sample/blob/master/drawing.rb) and [shooting](https://github.com/ongaeshi/rubybasic-sample/blob/master/mouse_shooting.rb).
 
-画像を貼る。(お絵描き)
+![drawing-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-03.png)
 
 ## Installation
 
