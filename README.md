@@ -74,7 +74,7 @@ end
     $ cd rubybasic-sample
     $ rubybasic exec mouse-shooting.rb
 
-## Support
+## Platform
 
 - [osx](https://github.com/ongaeshi/rubybasic-osx)
 - win
