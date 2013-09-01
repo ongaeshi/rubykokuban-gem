@@ -30,7 +30,7 @@ module Rubybasic
       elsif RUBY_PLATFORM =~ /darwin/
         :osx
       else
-        nil
+        :etc
       end
     end
 
