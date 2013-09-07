@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'archive-zip'
-  spec.add_dependency 'fetcher'
+  spec.add_dependency 'fetcher', "~> 0.1.0"
   spec.add_dependency 'thor'
 
   spec.add_development_dependency "bundler", "~> 1.3"
