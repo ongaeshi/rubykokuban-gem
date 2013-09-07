@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rubybasic/gem/version'
+require 'kokuban/gem/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "rubybasic-gem"
-  spec.version       = Rubybasic::Gem::VERSION
+  spec.name          = "kokuban"
+  spec.version       = Kokuban::Gem::VERSION
   spec.authors       = ["ongaeshi"]
   spec.email         = ["ongaeshi0621@gmail.com"]
-  spec.description   = %q{RubyBasic installer and executer}
-  spec.summary       = %q{RubyBasic installer and executer}
+  spec.description   = %q{RubyKokuban installer and executer}
+  spec.summary       = %q{RubyKokuban installer and executer}
   spec.homepage      = "https://github.com/ongaeshi/rubybasic-gem"
   spec.license       = "MIT"
 

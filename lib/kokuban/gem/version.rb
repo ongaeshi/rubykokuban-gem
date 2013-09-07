@@ -1,4 +1,4 @@
-module Rubybasic
+module Kokuban
   module Gem
     VERSION = "0.0.1"
   end

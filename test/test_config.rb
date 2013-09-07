@@ -1,8 +1,8 @@
-require 'rubybasic/config'
+require 'kokuban/config'
 
 require 'test/unit'
 
-module Rubybasic
+module Kokuban
   class TestConfig < Test::Unit::TestCase
     def setup
       @tmp_dir = File.join(File.dirname(__FILE__), "tmp")
@@ -15,18 +15,18 @@ module Rubybasic
     end
     
     def test_home_dir
-      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.kokuban'))
 
-      assert_equal File.join(@tmp_dir, '.rubybasic'), conf.home_dir
-      assert_equal File.join(@tmp_dir, '.rubybasic/app'), conf.app_dir
+      assert_equal File.join(@tmp_dir, '.kokuban'), conf.home_dir
+      assert_equal File.join(@tmp_dir, '.kokuban/app'), conf.app_dir
     end
 
     def test_platform
-      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.kokuban'))
 
       if RUBY_PLATFORM =~ /darwin/
         assert_equal :osx, conf.platform
-        assert_equal File.join(@tmp_dir, '.rubybasic/app/osx'), conf.platform_dir
+        assert_equal File.join(@tmp_dir, '.kokuban/app/osx'), conf.platform_dir
       end
     end
 
@@ -43,7 +43,7 @@ module Rubybasic
     end
 
     def test_versions
-      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.kokuban'))
       FileUtils.mkdir_p File.join(conf.platform_dir, "10.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.2")
@@ -52,23 +52,23 @@ module Rubybasic
     end
 
     def test_latest_dir
-      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.kokuban'))
       FileUtils.mkdir_p File.join(conf.platform_dir, "0.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "2.0.0")
 
-      assert_equal File.join(@tmp_dir, ".rubybasic/app/#{conf.platform.to_s}/2.0.0"), conf.latest_dir
+      assert_equal File.join(@tmp_dir, ".kokuban/app/#{conf.platform.to_s}/2.0.0"), conf.latest_dir
     end
 
     def test_install_dir
-      conf = Config.new(home_dir: File.join(@tmp_dir, '.rubybasic'))
+      conf = Config.new(home_dir: File.join(@tmp_dir, '.kokuban'))
       FileUtils.mkdir_p File.join(conf.platform_dir, "0.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "1.1.0")
       FileUtils.mkdir_p File.join(conf.platform_dir, "2.0.0")
 
       assert_equal conf.latest_dir, conf.install_dir
       assert_equal conf.latest_dir, conf.install_dir(nil)
-      assert_equal File.join(@tmp_dir, ".rubybasic/app/#{conf.platform.to_s}/1.1.0"), conf.install_dir("1.1.0")
+      assert_equal File.join(@tmp_dir, ".kokuban/app/#{conf.platform.to_s}/1.1.0"), conf.install_dir("1.1.0")
     end
 
   end

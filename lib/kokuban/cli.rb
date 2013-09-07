@@ -2,18 +2,18 @@
 require 'rubygems'
 require 'fetcher'
 require 'fileutils'
-require 'rubybasic/config'
-require 'rubybasic/gem/version'
-require 'rubybasic/utils'
+require 'kokuban/config'
+require 'kokuban/gem/version'
+require 'kokuban/utils'
 require 'thor'
 
-module Rubybasic
+module Kokuban
   class CLI < Thor
     class NotFoundError < RuntimeError ; end
 
     class_option :help, :type => :boolean, :aliases => '-h', :desc => 'Help message'
 
-    desc "install [options]", "Install RubyBasic binary"
+    desc "install [options]", "Install RubyKokuban.app"
     option :latest, :type => :boolean, :desc => 'Install latest version'
     option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
     def install
@@ -41,8 +41,8 @@ module Rubybasic
       FileUtils.rm_rf(install_dir) if File.exist?(install_dir)
       FileUtils.mkdir_p(install_dir)
       
-      url      = "https://github.com/ongaeshi/rubybasic-#{platform}/releases/download/v#{version}"
-      filename = "rubybasic-#{platform}-#{version}.zip"
+      url      = "https://github.com/ongaeshi/rubykokuban-#{platform}/releases/download/v#{version}"
+      filename = "rubykokuban-#{platform}-#{version}.zip"
       src      = File.join(url, filename)
       dst      = File.join(install_dir, filename)
 
@@ -55,7 +55,7 @@ module Rubybasic
       FileUtils.rm_f dst
     end
 
-    desc "uninstall", "Uninstall rubybasic from the local repository"
+    desc "uninstall", "Uninstall rubykokuban from the local repository"
     option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
     def uninstall
       conf = Config.new
@@ -75,7 +75,7 @@ module Rubybasic
       end
     end
 
-    desc "exec [input_file]", "Execute rubybasic file"
+    desc "exec [input_file]", "Execute rubykokuban file"
     option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
     def exec(*args)
       if args.empty?
@@ -88,7 +88,7 @@ module Rubybasic
       begin
         case conf.platform
         when :osx
-          app  = File.join(conf.install_dir(options[:version]), "RubyBasic.app")
+          app  = File.join(conf.install_dir(options[:version]), "RubyKokuban.app")
           args = args.map {|v|
             raise NotFoundError, "Not found '#{v}'" unless File.exist?(v)
             File.expand_path(v)
@@ -113,7 +113,7 @@ module Rubybasic
       # defined in /lib/thor/invocation.rb
       def invoke_command(task, *args)
         if task.name == "help" && args == [[]]
-          print "RubyBasic #{Rubybasic::Gem::VERSION}\n\n"
+          print "kokuban #{Kokuban::Gem::VERSION}\n\n"
         end
         
         if options[:help]

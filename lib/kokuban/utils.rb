@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'archive/zip'
 
-module Rubybasic
+module Kokuban
   module Utils
     module_function
 

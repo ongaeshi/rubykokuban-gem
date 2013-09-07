@@ -1,6 +1,6 @@
-require "rubybasic/gem/version"
+require "kokuban/gem/version"
 
-module Rubybasic
+module Kokuban
   module Gem
     # Your code goes here...
   end

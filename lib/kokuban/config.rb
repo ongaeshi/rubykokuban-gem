@@ -2,7 +2,7 @@ require 'fileutils'
 require 'json'
 require 'open-uri'
 
-module Rubybasic
+module Kokuban
   class Config
     def initialize(opts = {})
       @opts = opts
@@ -13,7 +13,7 @@ module Rubybasic
       #   1. Set value to @home_dir
       #   2. Create directory does not exist
       unless @home_dir
-        @home_dir = @opts[:home_dir] || File.join(home, '.rubybasic')
+        @home_dir = @opts[:home_dir] || File.join(home, '.kokuban')
         FileUtils.mkdir_p(@home_dir) unless File.exist?(@home_dir)
       end
       
@@ -69,7 +69,7 @@ module Rubybasic
     end
 
     def install_latest_version
-      src  = open("https://api.github.com/repos/ongaeshi/rubybasic-#{platform.to_s}/releases").read
+      src  = open("https://api.github.com/repos/ongaeshi/rubykokuban-#{platform.to_s}/releases").read
       json = JSON.parse(src)
       # p json
       json[0]['tag_name'][1..-1] # 'v0.2.0' -> '0.2.0'

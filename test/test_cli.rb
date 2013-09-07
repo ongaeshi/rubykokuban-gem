@@ -1,9 +1,9 @@
-require 'rubybasic/cli'
+require 'kokuban/cli'
 
 require 'stringio'
 require 'test/unit'
 
-module Rubybasic
+module Kokuban
   class TestCLI < Test::Unit::TestCase
     def setup
       $stdout = StringIO.new
