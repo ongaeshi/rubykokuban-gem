@@ -69,10 +69,10 @@ module Kokuban
     end
 
     def install_latest_version
-      src  = open("https://api.github.com/repos/ongaeshi/rubykokuban-#{platform.to_s}/releases").read
+      src  = open("https://api.github.com/repos/ongaeshi/rubykokuban-#{platform.to_s}/tags").read # Couldn't use release API
       json = JSON.parse(src)
       # p json
-      json[0]['tag_name'][1..-1] # 'v0.2.0' -> '0.2.0'
+      json[0]['name'][1..-1] # 'v0.1.0' -> '0.1.0'
     end
       
     private
