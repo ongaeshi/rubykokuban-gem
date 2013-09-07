@@ -9,7 +9,7 @@ You can write interactive applications be simplified by RubyKokuban.
 ```ruby
 def draw
   text 'Hello, rubykokuban!', 100, 100
-  circle 300, 100, 50
+  circle 350, 100, 50
 end
 ```
 
@@ -19,6 +19,7 @@ To move the circle is very simple.
 
 ```ruby
 def setup
+  set_window_size 480, 240
   @x = 0
 end
 
