@@ -66,9 +66,9 @@ end
 
     $ kokuban exec hello.rb
     
-### Useful Hotkey
+### Very, Very, Useful Hotkey
 
-- Ctrl+R (Be careful, not ⌘+R) - Reload script
+- **Ctrl+R** (Be careful, not ⌘+R) - Reload script
 
 ## Sample Code
 
