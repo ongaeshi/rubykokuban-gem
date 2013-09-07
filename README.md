@@ -59,7 +59,7 @@ Sample code of [drawing](https://github.com/ongaeshi/rubykokuban-sample/blob/mas
 ```ruby
 def draw
   text 'Hello, rubykokuban!', 100, 100
-  circle 300, 100, 50
+  circle 350, 100, 50
 end
 ```
 
