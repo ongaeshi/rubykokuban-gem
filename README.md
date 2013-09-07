@@ -1,19 +1,19 @@
-# rubybasic-gem
+# rubykokuban-gem
 
-RubyBasic installer and executer.
+RubyKokuban installer and executer.
 
-### RubyBasic?
+### RubyKokuban?
 
-You can write interactive applications be simplified by RubyBasic.
+You can write interactive applications be simplified by RubyKokuban.
 
 ```ruby:hello.rb
 def draw
-  text 'Hello, rubybasic!', 100, 100
+  text 'Hello, rubykokuban!', 100, 100
   circle 300, 100, 50
 end
 ```
 
-![hello-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-01.png)
+![hello-demo](https://raw.github.com/ongaeshi/rubykokuban-gem/data/images/demo-01.png)
 
 To move the circle is very simple.
 
@@ -27,56 +27,60 @@ def update
 end
 
 def draw
-  text 'Hello, rubybasic!', 100, 100
+  text 'Hello, rubykokuban!', 100, 100
   circle @x, 100, 50
 end
 ```
 
-![moveo-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-02.gif)
+![move-demo](https://raw.github.com/ongaeshi/rubykokuban-gem/data/images/demo-02.gif)
 
-Sample code of [drawing](https://github.com/ongaeshi/rubybasic-sample/blob/master/drawing.rb) and [shooting](https://github.com/ongaeshi/rubybasic-sample/blob/master/mouse_shooting.rb).
+Sample code of [drawing](https://github.com/ongaeshi/rubykokuban-sample/blob/master/drawing.rb) and [shooting](https://github.com/ongaeshi/rubykokuban-sample/blob/master/mouse_shooting.rb).
 
-![drawing-demo](https://raw.github.com/ongaeshi/rubybasic-gem/data/images/rubybasic-gem-03.png)
+![drawing-demo](https://raw.github.com/ongaeshi/rubykokuban-gem/data/images/demo-03.png)
 
 ## Installation
 
-    $ gem install rubybasic-gem
+    $ gem install kokuban
 
 ## Usage
 
-### Install RubyBasic.app
+### Install RubyKokuban.app
 
-    $ rubybasic install --latest
+    $ kokuban install --latest
     
 ### Installed?
 
-    $ rubybasic list
+    $ kokuban list
     osx (0.0.3)
     
 ### Write a code
 
 ```ruby:hello.rb
 def draw
-  text 'Hello, rubybasic!', 100, 100
+  text 'Hello, rubykokuban!', 100, 100
   circle 300, 100, 50
 end
 ```
 
 ### Execute script
 
-    $ rubybasic exec hello.rb
+    $ kokuban exec hello.rb
+    
+### Useful Hotkey
+
+- Ctrl+R (Be careful, not ⌘+R) - Reload script
 
 ## Sample Code
 
-[rubybasic-sample](https://github.com/ongaeshi/rubybasic-sample)
+[rubykokuban-sample](https://github.com/ongaeshi/rubykokuban-sample)
 
-    $ git clone https://github.com/ongaeshi/rubybasic-sample
-    $ cd rubybasic-sample
-    $ rubybasic exec mouse-shooting.rb
+    $ git clone https://github.com/ongaeshi/rubykokuban-sample
+    $ cd rubykokuban-sample
+    $ kokuban exec mouse-shooting.rb
 
 ## Platform
 
-- [osx](https://github.com/ongaeshi/rubybasic-osx)
+- [osx](https://github.com/ongaeshi/rubykokuban-osx)
 - win
 - linux
 - ios
