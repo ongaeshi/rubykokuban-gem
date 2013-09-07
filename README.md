@@ -6,7 +6,7 @@ RubyKokuban installer and executer.
 
 You can write interactive applications be simplified by RubyKokuban.
 
-```ruby:hello.rb
+```ruby
 def draw
   text 'Hello, rubykokuban!', 100, 100
   circle 300, 100, 50
@@ -17,7 +17,7 @@ end
 
 To move the circle is very simple.
 
-```ruby:hello.rb
+```ruby
 def setup
   @x = 0
 end
@@ -55,7 +55,7 @@ Sample code of [drawing](https://github.com/ongaeshi/rubykokuban-sample/blob/mas
     
 ### Write a code
 
-```ruby:hello.rb
+```ruby
 def draw
   text 'Hello, rubykokuban!', 100, 100
   circle 300, 100, 50
