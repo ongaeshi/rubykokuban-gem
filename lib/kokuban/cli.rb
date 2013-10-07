@@ -76,6 +76,7 @@ module Kokuban
     end
 
     desc "exec [input_file]", "Execute rubykokuban file"
+    option :file,    :aliases => '-f', :type => :string, :desc => 'Specify app file'
     option :version, :aliases => '-v', :type => :string, :desc => 'Specify version'
     def exec(*args)
       if args.empty?
@@ -88,7 +89,12 @@ module Kokuban
       begin
         case conf.platform
         when :osx
-          app  = File.join(conf.install_dir(options[:version]), "RubyKokuban.app")
+          if options[:file]
+            app = File.expand_path(options[:file])
+          else
+            app = File.join(conf.install_dir(options[:version]), "RubyKokuban.app")
+          end
+
           args = args.map {|v|
             raise NotFoundError, "Not found '#{v}'" unless File.exist?(v)
             File.expand_path(v)
