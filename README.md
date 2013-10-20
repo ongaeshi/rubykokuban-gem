@@ -89,7 +89,7 @@ end
 
 ## Features
 
-- It's made width mruby + openFrameworks.
+- It's made with mruby + openFrameworks.
   - Not a library. It's an application that move independently.
 - Benefits that can be expected.
   - Run on multiple platforms the same code
